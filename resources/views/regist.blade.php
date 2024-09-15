@@ -1,8 +1,11 @@
 @extends('layouts.auth')
+
 @section('body')
-    <main class="d-flex w-100">
-        <div class="container d-flex flex-column">
-            <div class="row vh-100">
+<div class="position-relative" style="height: 100vh; overflow: hidden;">
+    <img src="{{ asset('img/bg/bg2.jpg') }}" class="img-fluid w-100 h-100 position-absolute" style="object-fit: cover; top: 0; left: 0; z-index: -1;" alt="Background">
+        <main class="d-flex w-100 position-absolute top-50 start-50 translate-middle p-4 rounded shadow-lg">
+        <div class="container d-flex flex-column h-100 justify-content-center">
+             <div class="row">
                 <div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
                     <div class="d-table-cell align-middle">
                         @if (session()->has('error'))
@@ -80,4 +83,5 @@
             </div>
         </div>
     </main>
+</div>
 @endsection

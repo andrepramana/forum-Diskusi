@@ -1,4 +1,5 @@
 @extends('layouts.main')
+
 @section('contents')
     <div class="container-fluid p-0">
         <div class="row">
@@ -8,22 +9,28 @@
                         <h5 class="card-title mb-0">Profile Details</h5>
                     </div>
                     <div class="card-body text-center">
-                        <img src="/img/avatars/blank.png" alt="Christina Mason" class="img-fluid rounded-circle" width="128"
-                            height="128" />
-                        <p class="fs-5 mt-2">Untuk saat ini foto profile belum bisa diubah</p>
+                        <img src="/img/avatars/blank.png" alt="Profile Image" class="img-fluid rounded-circle" width="128" height="128" />
+                        <p class="fs-5 mt-2">Saat ini foto profil belum bisa diubah</p>
                     </div>
                     <div class="card-body">
+                        @if(session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <hr class="my-0" />
-                        <form action="/edit_profile" method="POST">
+                        <form action="{{ route('profile.update') }}" method="POST">
+                            @csrf
                             <div class="mb-2">
                                 <label class="form-label mt-2">Username :</label>
                                 <div class="form-control-lg p-0">{{ $users->username }}</div>
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Nama Lengkap :</label>
-                                <input class="form-control form-control-lg @error('name')is-invalid @enderror"
+                                <input class="form-control form-control-lg @error('name') is-invalid @enderror"
                                     type="text" name="name" placeholder="Masukkan nama lengkap" required
-                                    value="{{ $users->name }}" />
+                                    value="{{ old('name', $users->name) }}"/>
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -38,6 +45,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

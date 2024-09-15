@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Post;
 
@@ -29,5 +30,21 @@ class User_Controller extends Controller
                 "users" => auth()->user()
             ]
         );
+    }
+
+    public function updateName(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+    
+        $user = Auth::user();
+
+
+        $user->name = $request->input('name');
+
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 }

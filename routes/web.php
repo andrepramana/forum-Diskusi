@@ -38,6 +38,8 @@ Route::get('/profile/{user:username}', [User_Controller::class, 'show'])->middle
 
 Route::get('/profile/user/edit', [User_Controller::class, 'edit'])->middleware('auth');
 
+Route::post('/profile/update', [User_Controller::class, 'updateName'])->name('profile.update');
+
 Route::get('/', [Login_Controller::class, 'default']);
 
 Route::get('/login', [Login_Controller::class, 'index'])->name('login');
